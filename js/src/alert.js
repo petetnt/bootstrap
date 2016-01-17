@@ -1,5 +1,10 @@
+import jQuery from 'jquery'
+import JSDom from 'jsdom'
 import Util from './util'
 
+let document = document || JSDom.jsdom('<html><body></body></html>')
+let window = window || document.defaultView
+let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -8,7 +13,7 @@ import Util from './util'
  * --------------------------------------------------------------------------
  */
 
-const Alert = (($) => {
+const Alert = (($, document) => {
 
 
   /**
@@ -188,6 +193,6 @@ const Alert = (($) => {
 
   return Alert
 
-})(jQuery)
+})($, document)
 
 export default Alert

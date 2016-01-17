@@ -1,3 +1,9 @@
+import jQuery from 'jquery'
+import JSDom from 'jsdom'
+
+let document = document || JSDom.jsdom('<html><body></body></html>')
+let window = window || document.defaultView
+let $ = jQuery(window).noConflict()
 /**
  * --------------------------------------------------------------------------
  * Bootstrap (v4.0.0-alpha.2): button.js
@@ -5,7 +11,7 @@
  * --------------------------------------------------------------------------
  */
 
-const Button = (($) => {
+const Button = (($, document) => {
 
 
   /**
@@ -168,6 +174,6 @@ const Button = (($) => {
 
   return Button
 
-})(jQuery)
+})($, document)
 
 export default Button

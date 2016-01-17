@@ -1,5 +1,10 @@
+import jQuery from 'jquery'
+import JSDom from 'jsdom'
 import Util from './util'
 
+let document = document || JSDom.jsdom('<html><body></body></html>')
+let window = window || document.defaultView
+let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -8,7 +13,7 @@ import Util from './util'
  * --------------------------------------------------------------------------
  */
 
-const Modal = (($) => {
+const Modal = (($, document, window) => {
 
 
   /**
@@ -530,6 +535,6 @@ const Modal = (($) => {
 
   return Modal
 
-})(jQuery)
+})($, document, window)
 
 export default Modal

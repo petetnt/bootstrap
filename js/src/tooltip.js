@@ -1,7 +1,11 @@
-/* global Tether */
-
+import jQuery from 'jquery'
+import Tether from 'tether'
+import JSDom from 'jsdom'
 import Util from './util'
 
+let document = document || JSDom.jsdom('<html><body></body></html>')
+let window = window || document.defaultView
+let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -10,16 +14,15 @@ import Util from './util'
  * --------------------------------------------------------------------------
  */
 
-const Tooltip = (($) => {
+const Tooltip = (($, Tether, document) => {
 
   /**
    * Check for Tether dependency
    * Tether - http://github.hubspot.com/tether/
    */
-  if (window.Tether === undefined) {
+  if (Tether === undefined) {
     throw new Error('Bootstrap tooltips require Tether (http://github.hubspot.com/tether/)')
   }
-
 
   /**
    * ------------------------------------------------------------------------
@@ -647,6 +650,6 @@ const Tooltip = (($) => {
 
   return Tooltip
 
-})(jQuery)
+})($, Tether, document)
 
 export default Tooltip

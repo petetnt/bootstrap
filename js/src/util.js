@@ -1,3 +1,10 @@
+import jQuery from 'jquery'
+import JSDom from 'jsdom'
+
+let document = document || JSDom.jsdom('<html><body></body></html>')
+let window = window || document.defaultView
+let $ = jQuery(window).noConflict()
+
 /**
  * --------------------------------------------------------------------------
  * Bootstrap (v4.0.0-alpha.2): util.js
@@ -5,8 +12,7 @@
  * --------------------------------------------------------------------------
  */
 
-const Util = (($) => {
-
+const Util = (($, document, window) => {
 
   /**
    * ------------------------------------------------------------------------
@@ -157,6 +163,6 @@ const Util = (($) => {
 
   return Util
 
-})(jQuery)
+})($, document, window)
 
 export default Util
