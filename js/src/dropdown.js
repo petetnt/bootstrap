@@ -4,7 +4,6 @@ import Util from './util'
 
 let document = document || JSDom.jsdom('<html><body></body></html>')
 let window = window || document.defaultView
-let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -297,6 +296,6 @@ const Dropdown = (($, document) => {
 
   return Dropdown
 
-})($, document)
+})(jQuery, document)
 
 export default Dropdown

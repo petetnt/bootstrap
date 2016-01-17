@@ -73,8 +73,7 @@ module.exports = function (grunt) {
     babel: {
       dev: {
         options: {
-          sourceMap: true,
-          modules: 'ignore'
+          sourceMap: true
         },
         files: {
           'js/dist/index.js'     : 'js/src/index.js',
@@ -92,17 +91,11 @@ module.exports = function (grunt) {
         }
       },
       dist: {
-        options: {
-          modules: 'ignore'
-        },
         files: {
           '<%= concat.bootstrap.dest %>' : '<%= concat.bootstrap.dest %>'
         }
       },
       umd: {
-        options: {
-          modules: 'umd'
-        },
         files: {
           'dist/js/umd/index.js'     : 'js/src/index.js',
           'dist/js/umd/util.js'      : 'js/src/util.js',
@@ -493,7 +486,7 @@ module.exports = function (grunt) {
   // Default task.
   grunt.registerTask('default', ['clean:dist', 'test']);
 
-  grunt.registerTask('commonjs', ['babel:umd']);
+  grunt.registerTask('umd', ['babel:umd']);
 
   // Docs task.
   grunt.registerTask('docs-css', ['postcss:docs', 'postcss:examples', 'csscomb:docs', 'csscomb:examples', 'cssmin:docs']);

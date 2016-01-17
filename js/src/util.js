@@ -3,7 +3,6 @@ import JSDom from 'jsdom'
 
 let document = document || JSDom.jsdom('<html><body></body></html>')
 let window = window || document.defaultView
-let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -163,6 +162,6 @@ const Util = (($, document, window) => {
 
   return Util
 
-})($, document, window)
+})(jQuery, document, window)
 
 export default Util

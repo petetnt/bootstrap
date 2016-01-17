@@ -4,7 +4,6 @@ import Util from './util'
 
 let document = document || JSDom.jsdom('<html><body></body></html>')
 let window = window || document.defaultView
-let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -478,6 +477,6 @@ const Carousel = (($, document, window) => {
 
   return Carousel
 
-})($, document, window)
+})(jQuery, document, window)
 
 export default Carousel

@@ -4,7 +4,6 @@ import Tooltip from './tooltip'
 
 let document = document || JSDom.jsdom('<html><body></body></html>')
 let window = window || document.defaultView
-let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -183,6 +182,6 @@ const Popover = (($) => {
 
   return Popover
 
-})($)
+})(jQuery)
 
 export default Popover

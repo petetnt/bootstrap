@@ -4,8 +4,6 @@ import JSDom from 'jsdom'
 import Util from './util'
 
 let document = document || JSDom.jsdom('<html><body></body></html>')
-let window = window || document.defaultView
-let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -650,6 +648,6 @@ const Tooltip = (($, Tether, document) => {
 
   return Tooltip
 
-})($, Tether, document)
+})(jQuery, Tether, document)
 
 export default Tooltip

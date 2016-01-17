@@ -4,7 +4,6 @@ import Util from './util'
 
 let document = document || JSDom.jsdom('<html><body></body></html>')
 let window = window || document.defaultView
-let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -325,6 +324,6 @@ const ScrollSpy = (($, document, window) => {
 
   return ScrollSpy
 
-})($, document, window)
+})(jQuery, document, window)
 
 export default ScrollSpy

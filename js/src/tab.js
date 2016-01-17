@@ -4,7 +4,6 @@ import Util from './util'
 
 let document = document || JSDom.jsdom('<html><body></body></html>')
 let window = window || document.defaultView
-let $ = jQuery(window).noConflict()
 
 /**
  * --------------------------------------------------------------------------
@@ -278,6 +277,6 @@ const Tab = (($, document) => {
 
   return Tab
 
-})($, document)
+})(jQuery, document)
 
 export default Tab
