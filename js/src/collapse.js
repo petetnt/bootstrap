@@ -1,5 +1,5 @@
 import jQuery from 'jquery'
-import Util from './util'
+import { Util } from './util'
 
 /**
  * --------------------------------------------------------------------------
@@ -378,4 +378,4 @@ const Collapse = (($, Util) => {
 
 })(jQuery, Util)
 
-export default Collapse
+export { Collapse }

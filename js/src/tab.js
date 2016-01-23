@@ -1,5 +1,5 @@
 import jQuery from 'jquery'
-import Util from './util'
+import { Util } from './util'
 
 /**
  * --------------------------------------------------------------------------
@@ -275,4 +275,4 @@ const Tab = (($, Util) => {
 
 })(jQuery, Util)
 
-export default Tab
+export { Tab }

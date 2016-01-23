@@ -1,5 +1,5 @@
 import jQuery from 'jquery'
-import Util from './util'
+import { Util } from './util'
 
 /**
  * --------------------------------------------------------------------------
@@ -322,4 +322,4 @@ const ScrollSpy = (($, Util) => {
 
 })(jQuery, Util)
 
-export default ScrollSpy
+export { ScrollSpy }

@@ -1,5 +1,5 @@
 import jQuery from 'jquery'
-import Util from './util'
+import { Util } from './util'
 
 /**
  * --------------------------------------------------------------------------
@@ -190,4 +190,4 @@ const Alert = (($, Util) => {
 
 })(jQuery, Util)
 
-export default Alert
+export { Alert }

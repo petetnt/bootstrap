@@ -172,4 +172,4 @@ const Button = (($) => {
 
 })(jQuery)
 
-export default Button
+export { Button }

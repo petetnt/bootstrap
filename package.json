@@ -85,6 +85,9 @@
     "Gruntfile.js",
     "LICENSE"
   ],
+  "browserify": {
+    "transform": [["babelify", { "presets": ["es2015"] }]]
+  },
   "jspm": {
     "main": "js/bootstrap",
     "ignore": [

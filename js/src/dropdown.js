@@ -1,5 +1,5 @@
 import jQuery from 'jquery'
-import Util from './util'
+import { Util } from './util'
 
 /**
  * --------------------------------------------------------------------------
@@ -294,4 +294,4 @@ const Dropdown = (($, Util) => {
 
 })(jQuery, Util)
 
-export default Dropdown
+export { Dropdown }

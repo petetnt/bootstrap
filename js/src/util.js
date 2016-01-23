@@ -160,4 +160,4 @@ const Util = (($) => {
 
 })(jQuery)
 
-export default Util
+export { Util }

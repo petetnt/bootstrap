@@ -1,5 +1,5 @@
 import jQuery from 'jquery'
-import Tooltip from './tooltip'
+import { Tooltip, TooltipDefault, TooltipDefaultType } from './tooltip'
 
 /**
  * --------------------------------------------------------------------------
@@ -8,7 +8,7 @@ import Tooltip from './tooltip'
  * --------------------------------------------------------------------------
  */
 
-const Popover = (($, Tooltip) => {
+const Popover = (($, Tooltip, TooltipDefault, TooltipDefaultType) => {
 
 
   /**
@@ -23,7 +23,7 @@ const Popover = (($, Tooltip) => {
   const EVENT_KEY           = `.${DATA_KEY}`
   const JQUERY_NO_CONFLICT  = $.fn[NAME]
 
-  const Default = $.extend({}, Tooltip.Default, {
+  const Default = $.extend({}, TooltipDefault, {
     placement : 'right',
     trigger   : 'click',
     content   : '',
@@ -33,7 +33,7 @@ const Popover = (($, Tooltip) => {
               + '<div class="popover-content"></div></div>'
   })
 
-  const DefaultType = $.extend({}, Tooltip.DefaultType, {
+  const DefaultType = $.extend({}, TooltipDefaultType, {
     content : '(string|element|function)'
   })
 
@@ -178,6 +178,6 @@ const Popover = (($, Tooltip) => {
 
   return Popover
 
-})(jQuery, Tooltip)
+})(jQuery, Tooltip, TooltipDefault, TooltipDefaultType)
 
-export default Popover
+export { Popover }

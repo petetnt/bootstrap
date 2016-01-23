@@ -1,6 +1,6 @@
 import jQuery from 'jquery'
 import Tether from 'tether'
-import Util from './util'
+import { Util } from './util'
 
 /**
  * --------------------------------------------------------------------------
@@ -9,7 +9,35 @@ import Util from './util'
  * --------------------------------------------------------------------------
  */
 
-const Tooltip = (($, Tether, Util) => {
+const Default = {
+  animation   : true,
+  template    : '<div class="tooltip" role="tooltip">'
+              + '<div class="tooltip-arrow"></div>'
+              + '<div class="tooltip-inner"></div></div>',
+  trigger     : 'hover focus',
+  title       : '',
+  delay       : 0,
+  html        : false,
+  selector    : false,
+  placement   : 'top',
+  offset      : '0 0',
+  constraints : []
+}
+
+const DefaultType = {
+  animation   : 'boolean',
+  template    : 'string',
+  title       : '(string|element|function)',
+  trigger     : 'string',
+  delay       : '(number|object)',
+  html        : 'boolean',
+  selector    : '(string|boolean)',
+  placement   : '(string|function)',
+  offset      : 'string',
+  constraints : 'array'
+}
+
+const Tooltip = (($, Tether, Util, Default, DefaultType) => {
 
   /**
    * Check for Tether dependency
@@ -32,34 +60,6 @@ const Tooltip = (($, Tether, Util) => {
   const JQUERY_NO_CONFLICT  = $.fn[NAME]
   const TRANSITION_DURATION = 150
   const CLASS_PREFIX        = 'bs-tether'
-
-  const Default = {
-    animation   : true,
-    template    : '<div class="tooltip" role="tooltip">'
-                + '<div class="tooltip-arrow"></div>'
-                + '<div class="tooltip-inner"></div></div>',
-    trigger     : 'hover focus',
-    title       : '',
-    delay       : 0,
-    html        : false,
-    selector    : false,
-    placement   : 'top',
-    offset      : '0 0',
-    constraints : []
-  }
-
-  const DefaultType = {
-    animation   : 'boolean',
-    template    : 'string',
-    title       : '(string|element|function)',
-    trigger     : 'string',
-    delay       : '(number|object)',
-    html        : 'boolean',
-    selector    : '(string|boolean)',
-    placement   : '(string|function)',
-    offset      : 'string',
-    constraints : 'array'
-  }
 
   const AttachmentMap = {
     TOP    : 'bottom center',
@@ -645,6 +645,6 @@ const Tooltip = (($, Tether, Util) => {
 
   return Tooltip
 
-})(jQuery, Tether, Util)
+})(jQuery, Tether, Util, Default, DefaultType)
 
-export default Tooltip
+export { Tooltip, Default, DefaultType }

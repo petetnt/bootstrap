@@ -1,5 +1,5 @@
 import jQuery from 'jquery'
-import Util from './util'
+import { Util } from './util'
 
 /**
  * --------------------------------------------------------------------------
@@ -475,4 +475,4 @@ const Carousel = (($, Util) => {
 
 })(jQuery, Util)
 
-export default Carousel
+export { Carousel }
