@@ -77,7 +77,6 @@
     "node": ">=0.10.1"
   },
   "files": [
-    "index.js",
     "dist",
     "grunt/*.js",
     "grunt/*.json",
