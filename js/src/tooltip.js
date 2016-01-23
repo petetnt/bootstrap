@@ -1,7 +1,6 @@
-/* global Tether */
-
+import jQuery from 'jquery'
+import Tether from 'tether'
 import Util from './util'
-
 
 /**
  * --------------------------------------------------------------------------
@@ -10,16 +9,15 @@ import Util from './util'
  * --------------------------------------------------------------------------
  */
 
-const Tooltip = (($) => {
+const Tooltip = (($, Tether, Util) => {
 
   /**
    * Check for Tether dependency
    * Tether - http://github.hubspot.com/tether/
    */
-  if (window.Tether === undefined) {
+  if (Tether === 'undefined') {
     throw new Error('Bootstrap tooltips require Tether (http://github.hubspot.com/tether/)')
   }
-
 
   /**
    * ------------------------------------------------------------------------
@@ -647,6 +645,6 @@ const Tooltip = (($) => {
 
   return Tooltip
 
-})(jQuery)
+})(jQuery, Tether, Util)
 
 export default Tooltip

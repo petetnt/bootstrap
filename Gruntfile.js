@@ -24,7 +24,6 @@ module.exports = function (grunt) {
   var autoprefixerSettings = require('./grunt/autoprefixer-settings.js');
   var autoprefixer = require('autoprefixer')(autoprefixerSettings);
 
-  var generateCommonJSModule = require('./grunt/bs-commonjs-generator.js');
   var configBridge = grunt.file.readJSON('./grunt/configBridge.json', { encoding: 'utf8' });
 
   Object.keys(configBridge.paths).forEach(function (key) {
@@ -74,10 +73,10 @@ module.exports = function (grunt) {
     babel: {
       dev: {
         options: {
-          sourceMap: true,
-          modules: 'ignore'
+          sourceMap: true
         },
         files: {
+          'js/dist/index.js'     : 'js/src/index.js',
           'js/dist/util.js'      : 'js/src/util.js',
           'js/dist/alert.js'     : 'js/src/alert.js',
           'js/dist/button.js'    : 'js/src/button.js',
@@ -92,18 +91,13 @@ module.exports = function (grunt) {
         }
       },
       dist: {
-        options: {
-          modules: 'ignore'
-        },
         files: {
           '<%= concat.bootstrap.dest %>' : '<%= concat.bootstrap.dest %>'
         }
       },
       umd: {
-        options: {
-          modules: 'umd'
-        },
         files: {
+          'dist/js/umd/index.js'     : 'js/src/index.js',
           'dist/js/umd/util.js'      : 'js/src/util.js',
           'dist/js/umd/alert.js'     : 'js/src/alert.js',
           'dist/js/umd/button.js'    : 'js/src/button.js',
@@ -472,7 +466,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test-js', ['eslint', 'jscs:core', 'jscs:test', 'jscs:grunt', 'qunit']);
 
   // JS distribution task.
-  grunt.registerTask('dist-js', ['babel:dev', 'concat', 'lineremover', 'babel:dist', 'stamp', 'uglify:core', 'commonjs']);
+  grunt.registerTask('dist-js', ['babel:dev', 'concat', 'lineremover', 'babel:dist', 'stamp', 'uglify:core', 'babel:umd']);
 
   grunt.registerTask('test-scss', ['scsslint:core']);
 
@@ -491,16 +485,6 @@ module.exports = function (grunt) {
 
   // Default task.
   grunt.registerTask('default', ['clean:dist', 'test']);
-
-  grunt.registerTask('commonjs', ['babel:umd', 'npm-js']);
-
-  grunt.registerTask('npm-js', 'Generate npm-js entrypoint module in dist dir.', function () {
-    var srcFiles = Object.keys(grunt.config.get('babel.umd.files')).map(function (filename) {
-      return './' + path.join('umd', path.basename(filename))
-    })
-    var destFilepath = 'dist/js/npm.js';
-    generateCommonJSModule(grunt, srcFiles, destFilepath);
-  });
 
   // Docs task.
   grunt.registerTask('docs-css', ['postcss:docs', 'postcss:examples', 'csscomb:docs', 'csscomb:examples', 'cssmin:docs']);

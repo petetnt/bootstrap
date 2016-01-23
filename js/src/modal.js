@@ -1,5 +1,5 @@
+import jQuery from 'jquery'
 import Util from './util'
-
 
 /**
  * --------------------------------------------------------------------------
@@ -8,7 +8,7 @@ import Util from './util'
  * --------------------------------------------------------------------------
  */
 
-const Modal = (($) => {
+const Modal = (($, Util) => {
 
 
   /**
@@ -530,6 +530,6 @@ const Modal = (($) => {
 
   return Modal
 
-})(jQuery)
+})(jQuery, Util)
 
 export default Modal

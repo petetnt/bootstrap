@@ -1,5 +1,5 @@
+import jQuery from 'jquery'
 import Util from './util'
-
 
 /**
  * --------------------------------------------------------------------------
@@ -8,7 +8,7 @@ import Util from './util'
  * --------------------------------------------------------------------------
  */
 
-const ScrollSpy = (($) => {
+const ScrollSpy = (($, Util) => {
 
 
   /**
@@ -320,6 +320,6 @@ const ScrollSpy = (($) => {
 
   return ScrollSpy
 
-})(jQuery)
+})(jQuery, Util)
 
 export default ScrollSpy

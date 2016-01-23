@@ -1,5 +1,5 @@
+import jQuery from 'jquery'
 import Util from './util'
-
 
 /**
  * --------------------------------------------------------------------------
@@ -8,7 +8,7 @@ import Util from './util'
  * --------------------------------------------------------------------------
  */
 
-const Dropdown = (($) => {
+const Dropdown = (($, Util) => {
 
 
   /**
@@ -292,6 +292,6 @@ const Dropdown = (($) => {
 
   return Dropdown
 
-})(jQuery)
+})(jQuery, Util)
 
 export default Dropdown
