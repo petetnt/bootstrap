@@ -3,12 +3,8 @@
     [
       "es2015",
       {
-        "modules": false,
-        "loose": true
+        "modules": "umd",
       }
     ]
-  ],
-  "plugins": [
-    "transform-es2015-modules-strip"
   ]
 }

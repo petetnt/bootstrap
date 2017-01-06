@@ -1,10 +1,10 @@
-{
+module.exports = {
   "root": true,
-  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "es6": true,
-    "jquery": true
+    "node": true,
+    "jquery": false
   },
   "extends": "eslint:recommended",
   "parserOptions": {
