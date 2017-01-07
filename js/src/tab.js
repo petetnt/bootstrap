@@ -240,6 +240,10 @@ export default class Tab {
     })
   }
 
+  static init() {
+    init()
+  }
+
 }
 
 

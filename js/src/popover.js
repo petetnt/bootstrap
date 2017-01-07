@@ -158,6 +158,7 @@ export default class Popover extends Tooltip {
   static init() {
     init()
   }
+
 }
 
 export function init() {

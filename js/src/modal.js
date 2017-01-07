@@ -484,6 +484,7 @@ export default class Modal {
   static init() {
     init()
   }
+
 }
 
 export function init() {

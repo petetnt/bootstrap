@@ -454,6 +454,10 @@ export default class Carousel {
     event.preventDefault()
   }
 
+  static init() {
+    init()
+  }
+
 }
 
 

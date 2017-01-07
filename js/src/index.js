@@ -10,7 +10,7 @@ import Tab from './tab'
 import Tooltip from './tooltip'
 import Util from './util'
 
-function init() {
+export function init() {
   Alert.init()
   Button.init()
   Carousel.init()
@@ -21,10 +21,9 @@ function init() {
   ScrollSpy.init()
   Tab.init()
   Tooltip.init()
-  Util.init()
 }
 
-export {
+export default {
   Alert,
   Button,
   Carousel,
@@ -38,6 +37,3 @@ export {
   Util,
   init
 }
-
-export default init
-
