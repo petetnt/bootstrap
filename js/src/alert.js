@@ -152,9 +152,15 @@ export default class Alert {
       alertInstance.close(this)
     }
   }
+
+  static init() {
+    init()
+  }
 }
 
 export function init() {
+
+
   /**
    * ------------------------------------------------------------------------
    * Data Api implementation
@@ -181,6 +187,6 @@ export function init() {
   }
 }
 
-if (window.__BOOSTRAP_SECRET_AUTO_INIT_VARIABLE) {
+if (window.__BOOTSTRAP_SECRET_AUTO_INIT_VARIABLE) {
   init()
 }

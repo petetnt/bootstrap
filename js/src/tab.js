@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import Util from './util'
 
 
@@ -8,241 +9,241 @@ import Util from './util'
  * --------------------------------------------------------------------------
  */
 
-const Tab = (($) => {
-
-
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
 
-  const NAME                = 'tab'
-  const VERSION             = '4.0.0-alpha.6'
-  const DATA_KEY            = 'bs.tab'
-  const EVENT_KEY           = `.${DATA_KEY}`
-  const DATA_API_KEY        = '.data-api'
-  const JQUERY_NO_CONFLICT  = $.fn[NAME]
-  const TRANSITION_DURATION = 150
+const NAME                = 'tab'
+const VERSION             = '4.0.0-alpha.6'
+const DATA_KEY            = 'bs.tab'
+const EVENT_KEY           = `.${DATA_KEY}`
+const DATA_API_KEY        = '.data-api'
+const JQUERY_NO_CONFLICT  = $.fn[NAME]
+const TRANSITION_DURATION = 150
 
-  const Event = {
-    HIDE           : `hide${EVENT_KEY}`,
-    HIDDEN         : `hidden${EVENT_KEY}`,
-    SHOW           : `show${EVENT_KEY}`,
-    SHOWN          : `shown${EVENT_KEY}`,
-    CLICK_DATA_API : `click${EVENT_KEY}${DATA_API_KEY}`
+const Event = {
+  HIDE           : `hide${EVENT_KEY}`,
+  HIDDEN         : `hidden${EVENT_KEY}`,
+  SHOW           : `show${EVENT_KEY}`,
+  SHOWN          : `shown${EVENT_KEY}`,
+  CLICK_DATA_API : `click${EVENT_KEY}${DATA_API_KEY}`
+}
+
+const ClassName = {
+  DROPDOWN_MENU : 'dropdown-menu',
+  ACTIVE        : 'active',
+  DISABLED      : 'disabled',
+  FADE          : 'fade',
+  SHOW          : 'show'
+}
+
+const Selector = {
+  A                     : 'a',
+  LI                    : 'li',
+  DROPDOWN              : '.dropdown',
+  LIST                  : 'ul:not(.dropdown-menu), ol:not(.dropdown-menu), nav:not(.dropdown-menu)',
+  FADE_CHILD            : '> .nav-item .fade, > .fade',
+  ACTIVE                : '.active',
+  ACTIVE_CHILD          : '> .nav-item > .active, > .active',
+  DATA_TOGGLE           : '[data-toggle="tab"], [data-toggle="pill"]',
+  DROPDOWN_TOGGLE       : '.dropdown-toggle',
+  DROPDOWN_ACTIVE_CHILD : '> .dropdown-menu .active'
+}
+
+
+/**
+ * ------------------------------------------------------------------------
+ * Class Definition
+ * ------------------------------------------------------------------------
+ */
+
+export default class Tab {
+
+  constructor(element) {
+    this._element = element
   }
 
-  const ClassName = {
-    DROPDOWN_MENU : 'dropdown-menu',
-    ACTIVE        : 'active',
-    DISABLED      : 'disabled',
-    FADE          : 'fade',
-    SHOW          : 'show'
-  }
 
-  const Selector = {
-    A                     : 'a',
-    LI                    : 'li',
-    DROPDOWN              : '.dropdown',
-    LIST                  : 'ul:not(.dropdown-menu), ol:not(.dropdown-menu), nav:not(.dropdown-menu)',
-    FADE_CHILD            : '> .nav-item .fade, > .fade',
-    ACTIVE                : '.active',
-    ACTIVE_CHILD          : '> .nav-item > .active, > .active',
-    DATA_TOGGLE           : '[data-toggle="tab"], [data-toggle="pill"]',
-    DROPDOWN_TOGGLE       : '.dropdown-toggle',
-    DROPDOWN_ACTIVE_CHILD : '> .dropdown-menu .active'
+  // getters
+
+  static get VERSION() {
+    return VERSION
   }
 
 
-  /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
-   */
+  // public
 
-  class Tab {
-
-    constructor(element) {
-      this._element = element
-    }
-
-
-    // getters
-
-    static get VERSION() {
-      return VERSION
-    }
-
-
-    // public
-
-    show() {
-      if (this._element.parentNode &&
+  show() {
+    if (this._element.parentNode &&
           this._element.parentNode.nodeType === Node.ELEMENT_NODE &&
           $(this._element).hasClass(ClassName.ACTIVE) ||
           $(this._element).hasClass(ClassName.DISABLED)) {
-        return
-      }
+      return
+    }
 
-      let target
-      let previous
-      const listElement = $(this._element).closest(Selector.LIST)[0]
-      const selector    = Util.getSelectorFromElement(this._element)
+    let target
+    let previous
+    const listElement = $(this._element).closest(Selector.LIST)[0]
+    const selector    = Util.getSelectorFromElement(this._element)
 
-      if (listElement) {
-        previous = $.makeArray($(listElement).find(Selector.ACTIVE))
-        previous = previous[previous.length - 1]
-      }
+    if (listElement) {
+      previous = $.makeArray($(listElement).find(Selector.ACTIVE))
+      previous = previous[previous.length - 1]
+    }
 
-      const hideEvent = $.Event(Event.HIDE, {
-        relatedTarget: this._element
-      })
+    const hideEvent = $.Event(Event.HIDE, {
+      relatedTarget: this._element
+    })
 
-      const showEvent = $.Event(Event.SHOW, {
-        relatedTarget: previous
-      })
+    const showEvent = $.Event(Event.SHOW, {
+      relatedTarget: previous
+    })
 
-      if (previous) {
-        $(previous).trigger(hideEvent)
-      }
+    if (previous) {
+      $(previous).trigger(hideEvent)
+    }
 
-      $(this._element).trigger(showEvent)
+    $(this._element).trigger(showEvent)
 
-      if (showEvent.isDefaultPrevented() ||
+    if (showEvent.isDefaultPrevented() ||
          hideEvent.isDefaultPrevented()) {
-        return
-      }
+      return
+    }
 
-      if (selector) {
-        target = $(selector)[0]
-      }
+    if (selector) {
+      target = $(selector)[0]
+    }
 
-      this._activate(
+    this._activate(
         this._element,
         listElement
       )
 
-      const complete = () => {
-        const hiddenEvent = $.Event(Event.HIDDEN, {
-          relatedTarget: this._element
-        })
+    const complete = () => {
+      const hiddenEvent = $.Event(Event.HIDDEN, {
+        relatedTarget: this._element
+      })
 
-        const shownEvent = $.Event(Event.SHOWN, {
-          relatedTarget: previous
-        })
+      const shownEvent = $.Event(Event.SHOWN, {
+        relatedTarget: previous
+      })
 
-        $(previous).trigger(hiddenEvent)
-        $(this._element).trigger(shownEvent)
-      }
-
-      if (target) {
-        this._activate(target, target.parentNode, complete)
-      } else {
-        complete()
-      }
+      $(previous).trigger(hiddenEvent)
+      $(this._element).trigger(shownEvent)
     }
 
-    dispose() {
-      $.removeClass(this._element, DATA_KEY)
-      this._element = null
+    if (target) {
+      this._activate(target, target.parentNode, complete)
+    } else {
+      complete()
     }
+  }
+
+  dispose() {
+    $.removeClass(this._element, DATA_KEY)
+    this._element = null
+  }
 
 
-    // private
+  // private
 
-    _activate(element, container, callback) {
-      const active          = $(container).find(Selector.ACTIVE_CHILD)[0]
-      const isTransitioning = callback
+  _activate(element, container, callback) {
+    const active          = $(container).find(Selector.ACTIVE_CHILD)[0]
+    const isTransitioning = callback
         && Util.supportsTransitionEnd()
         && (active && $(active).hasClass(ClassName.FADE)
            || Boolean($(container).find(Selector.FADE_CHILD)[0]))
 
-      const complete = () => this._transitionComplete(
+    const complete = () => this._transitionComplete(
         element,
         active,
         isTransitioning,
         callback
       )
 
-      if (active && isTransitioning) {
-        $(active)
+    if (active && isTransitioning) {
+      $(active)
           .one(Util.TRANSITION_END, complete)
           .emulateTransitionEnd(TRANSITION_DURATION)
 
-      } else {
-        complete()
-      }
-
-      if (active) {
-        $(active).removeClass(ClassName.SHOW)
-      }
+    } else {
+      complete()
     }
 
-    _transitionComplete(element, active, isTransitioning, callback) {
-      if (active) {
-        $(active).removeClass(ClassName.ACTIVE)
+    if (active) {
+      $(active).removeClass(ClassName.SHOW)
+    }
+  }
 
-        const dropdownChild = $(active.parentNode).find(
+  _transitionComplete(element, active, isTransitioning, callback) {
+    if (active) {
+      $(active).removeClass(ClassName.ACTIVE)
+
+      const dropdownChild = $(active.parentNode).find(
           Selector.DROPDOWN_ACTIVE_CHILD
         )[0]
 
-        if (dropdownChild) {
-          $(dropdownChild).removeClass(ClassName.ACTIVE)
-        }
-
-        active.setAttribute('aria-expanded', false)
+      if (dropdownChild) {
+        $(dropdownChild).removeClass(ClassName.ACTIVE)
       }
 
-      $(element).addClass(ClassName.ACTIVE)
-      element.setAttribute('aria-expanded', true)
+      active.setAttribute('aria-expanded', false)
+    }
 
-      if (isTransitioning) {
-        Util.reflow(element)
-        $(element).addClass(ClassName.SHOW)
-      } else {
-        $(element).removeClass(ClassName.FADE)
-      }
+    $(element).addClass(ClassName.ACTIVE)
+    element.setAttribute('aria-expanded', true)
 
-      if (element.parentNode &&
+    if (isTransitioning) {
+      Util.reflow(element)
+      $(element).addClass(ClassName.SHOW)
+    } else {
+      $(element).removeClass(ClassName.FADE)
+    }
+
+    if (element.parentNode &&
           $(element.parentNode).hasClass(ClassName.DROPDOWN_MENU)) {
 
-        const dropdownElement = $(element).closest(Selector.DROPDOWN)[0]
-        if (dropdownElement) {
-          $(dropdownElement).find(Selector.DROPDOWN_TOGGLE).addClass(ClassName.ACTIVE)
-        }
-
-        element.setAttribute('aria-expanded', true)
+      const dropdownElement = $(element).closest(Selector.DROPDOWN)[0]
+      if (dropdownElement) {
+        $(dropdownElement).find(Selector.DROPDOWN_TOGGLE).addClass(ClassName.ACTIVE)
       }
 
-      if (callback) {
-        callback()
-      }
+      element.setAttribute('aria-expanded', true)
     }
 
-
-    // static
-
-    static _jQueryInterface(config) {
-      return this.each(function () {
-        const $this = $(this)
-        let data    = $this.data(DATA_KEY)
-
-        if (!data) {
-          data = new Tab(this)
-          $this.data(DATA_KEY, data)
-        }
-
-        if (typeof config === 'string') {
-          if (data[config] === undefined) {
-            throw new Error(`No method named "${config}"`)
-          }
-          data[config]()
-        }
-      })
+    if (callback) {
+      callback()
     }
-
   }
+
+
+  // static
+
+  static _jQueryInterface(config) {
+    return this.each(function () {
+      const $this = $(this)
+      let data    = $this.data(DATA_KEY)
+
+      if (!data) {
+        data = new Tab(this)
+        $this.data(DATA_KEY, data)
+      }
+
+      if (typeof config === 'string') {
+        if (data[config] === undefined) {
+          throw new Error(`No method named "${config}"`)
+        }
+        data[config]()
+      }
+    })
+  }
+
+}
+
+
+export function init() {
 
 
   /**
@@ -273,6 +274,8 @@ const Tab = (($) => {
 
   return Tab
 
-})(jQuery)
+}
 
-export default Tab
+if (window.__BOOTSTRAP_SECRET_AUTO_INIT_VARIABLE) {
+  init()
+}
