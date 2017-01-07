@@ -1,3 +1,4 @@
+window.__BOOTSTRAP_EXTENDS_TOOLTIP = true
 import $ from 'jquery'
 import Tooltip from './tooltip'
 

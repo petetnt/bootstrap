@@ -142,6 +142,10 @@ const Util = {
 
 export default Util
 
+if (window.QUnit) {
+  window.unitTestsGetUID = Util.getUID
+}
+
 function setTransitionEndSupport() {
   transition = transitionEndTest()
 

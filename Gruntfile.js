@@ -238,8 +238,8 @@ module.exports = function (grunt) {
       'scss-lint-docs': {
         command: 'npm run scss-lint-docs'
       },
-      uglify: {
-        command: 'npm run uglify'
+      webpack: {
+        command: 'npm run webpack'
       },
       'uglify-docs': {
         command: 'npm run uglify-docs'
@@ -326,7 +326,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', testSubtasks)
 
   // JS distribution task.
-  grunt.registerTask('dist-js', ['babel:dev', 'concat', 'babel:dist', 'stamp', 'exec:uglify'])
+  grunt.registerTask('dist-js', ['babel:dev', 'concat', 'babel:dist', 'stamp', 'exec:webpack'])
 
   grunt.registerTask('test-scss', ['exec:scss-lint'])
 

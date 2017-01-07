@@ -120,7 +120,6 @@ const Trigger = {
 export default class Tooltip {
 
   constructor(element, config) {
-
     // private
     this._isEnabled        = true
     this._timeout          = 0
@@ -677,6 +676,10 @@ export function init() {
 
 }
 
-if (window.__BOOTSTRAP_SECRET_AUTO_INIT_VARIABLE) {
+if (window.__BOOTSTRAP_SECRET_AUTO_INIT_VARIABLE && !window.__BOOTSTRAP_EXTENDS_TOOLTIP) {
   init()
+}
+
+if (!window.__BOOTSTRAP_EXTENDS_TOOLTIP) {
+  delete window.__BOOTSTRAP_EXTENDS_TOOLTIP
 }

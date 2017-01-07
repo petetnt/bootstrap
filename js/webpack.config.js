@@ -59,9 +59,9 @@ module.exports = {
   ],
   output: {
     path: path.join('js', 'dist'),
-    filename: process.env.BOOTSTRAP_CREATE_STANDALONE ? '[name].js' : '[name].standalone.js'
+    filename: process.env.BOOTSTRAP_CREATE_STANDALONE ? '[name].standalone.js' : '[name].js'
   },
-  externals: process.env.BOOTSTRAP_CREATE_STANDALONE ? {
+  externals: !process.env.BOOTSTRAP_CREATE_STANDALONE ? {
     jquery: '$',
     tether: 'Tether'
   } : null
