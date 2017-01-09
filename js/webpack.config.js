@@ -4,7 +4,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 const webpack = require('webpack')
-const WrapperPlugin = require('wrapper-webpack-plugin')
 const path = require('path')
 
 const modules = {
@@ -47,8 +46,11 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
-    new WrapperPlugin({
-      header:'\nwindow.__BOOTSTRAP_SECRET_AUTO_INIT_VARIABLE = window.__BOOTSTRAP_SECRET_AUTO_INIT_VARIABLE || true;\n\n'
+    new webpack.DefinePlugin({
+      window: {
+        __BOOTSTRAP_SECRET_AUTO_INIT_VARIABLE:
+        'window && typeof window.__BOOTSTRAP_SECRET_AUTO_INIT_VARIABLE !== "undefined" ? window.__BOOTSTRAP_SECRET_AUTO_INIT_VARIABLE : true'
+      }
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
